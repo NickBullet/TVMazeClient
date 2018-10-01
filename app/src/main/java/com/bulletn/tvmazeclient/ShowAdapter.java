@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class ShowAdapter extends ArrayAdapter<Show> {
         TextView tvShowName = (TextView) view.findViewById(R.id.show_name);
         TextView tvShowRating = (TextView) view.findViewById(R.id.show_rating);
         TextView tvShowGenres = (TextView) view.findViewById(R.id.show_genres);
+        CheckBox cbFavorite = (CheckBox) view.findViewById(R.id.show_fav);
 
         Show show = shows.get(position);
 

@@ -24,10 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".SplashActivity"
+                  android:label="SplashActivity"
+                    android:theme="@style/SplashTheme">
         </activity>
+
         <activity
             android:name=".FavoriteActivity"
             android:label="@string/title_activity_favorite"

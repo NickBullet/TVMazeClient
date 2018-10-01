@@ -1,5 +1,6 @@
 package com.bulletn.tvmazeclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FavoriteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,15 +33,6 @@ public class FavoriteActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -47,13 +43,12 @@ public class FavoriteActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         MainActivity mA = new MainActivity();
 
-        if (getIntent() != null){
-            position = getIntent().getIntExtra("position",-1);
-        }
+        List<Show> showFav;
+        showFav = new ArrayList<Show>();
 
-        //showLists = mA.showList.get(position);
-        //textView = (TextView) findViewById(R.id.textView);
-        //textView.setText(showLists);
+        ListView showListView = (ListView) findViewById(R.id.showList);
+        ShowAdapter showAdapter = new ShowAdapter(this, R.layout.list_item, showFav);
+        showListView.setAdapter(showAdapter);
     }
 
     @Override
@@ -96,22 +91,15 @@ public class FavoriteActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_main) {
+            Intent intent = new Intent(FavoriteActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_favorite) {
+            drawer.closeDrawer(GravityCompat.START);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
